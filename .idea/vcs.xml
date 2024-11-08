@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dafne" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dafne-dicomUtils" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dafne-dl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dafne-models" vcs="Git" />
+  </component>
+</project>
