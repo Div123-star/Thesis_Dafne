@@ -5,10 +5,12 @@
       <sourceFolder url="file://$MODULE_DIR$/dafne-dl/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dafne-models/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dafne/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/dafne-dicomUtils/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/dafne-venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv1" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12 (dafne)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (dafne)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
