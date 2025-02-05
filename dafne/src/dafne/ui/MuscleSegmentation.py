@@ -17,6 +17,9 @@ import gc
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from ..config import GlobalConfig, load_config
+import sys
+sys.path.append('/Users/dibya/dafne/dafne-dicomUtils/src')
+
 load_config()
 
 import tensorflow as tf
