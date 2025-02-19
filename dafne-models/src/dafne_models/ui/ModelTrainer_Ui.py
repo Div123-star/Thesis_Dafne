@@ -51,6 +51,7 @@ class Ui_ModelTrainerUI(object):
         self.trainable_layers_label.setObjectName("trainable_layers_label")
         self.horizontalLayout_6.addWidget(self.trainable_layers_label)
         self.num_trainable_layers_spinBox = QtWidgets.QSpinBox(self.transfer_learning_checkBox)
+        self.num_trainable_layers_spinBox.setMaximum(300)
         self.num_trainable_layers_spinBox.setObjectName("num_trainable_layers_spinBox")
         self.horizontalLayout_6.addWidget(self.num_trainable_layers_spinBox)
         self.label_6 = QtWidgets.QLabel(self.transfer_learning_checkBox)

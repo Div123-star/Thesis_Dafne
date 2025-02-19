@@ -75,7 +75,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="num_trainable_layers_spinBox"/>
+         <widget class="QSpinBox" name="num_trainable_layers_spinBox">
+          <property name="maximum">
+           <number>300</number>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_6">
