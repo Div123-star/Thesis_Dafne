@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/dafne-dl/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dafne-models/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/dafne/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/dafne-dicomUtils/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/dafne-venv" />
       <excludeFolder url="file://$MODULE_DIR$/.venv1" />

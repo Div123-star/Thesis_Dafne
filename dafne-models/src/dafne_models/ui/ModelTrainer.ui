@@ -68,14 +68,14 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="QLabel" name="trainable_layers_label">
+         <widget class="QLabel" name="fine_tune_label">
           <property name="text">
-           <string>trainable layers</string>
+           <string>fine_tune_at</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="num_trainable_layers_spinBox">
+         <widget class="QSpinBox" name="fine_tune_at_spinBox">
           <property name="maximum">
            <number>300</number>
           </property>

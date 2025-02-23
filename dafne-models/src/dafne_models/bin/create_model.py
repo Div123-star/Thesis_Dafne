@@ -289,7 +289,7 @@ def prepare_data(training_data_list, validation_data_list, common_resolution, mo
     return training_generator, steps, x_val_list, y_val_list
 
 def train_model(model, training_generator, steps, x_val_list, y_val_list, custom_callbacks=None, base_model=None,
-                num_trainable_layers=None):
+                fine_tune_at=None):
     """
     Train the model
     :param model: Keras model
@@ -320,31 +320,38 @@ def train_model(model, training_generator, steps, x_val_list, y_val_list, custom
             current_layer += 1
             try:
                 layer.set_weights(base_model_layer.get_weights())
+                layer.trainable = False  # Initially freeze all transferred layers
             except ValueError:
                 print(f"Skipping incompatible layer: {layer.name}")
                 break
-            layer.trainable = False  # Initially freeze all transferred layers
+
 
         model.layers[-1].trainable = True  # Keep the last layer trainable by default
 
-        # Fine-tuning at a specific point if num_trainable_layers is provided
-        if num_trainable_layers is not None:
+
+        if fine_tune_at is not None:
             total_layers = len(model.layers)  # Total layers in the model
 
             # Ensure the user-provided value is valid
-            if num_trainable_layers < 0 or num_trainable_layers > total_layers:
-                raise ValueError(
-                    f"Invalid number of trainable layers: {num_trainable_layers}. It must be between 0 and {total_layers}."
-                )
+            if fine_tune_at < 0 or fine_tune_at > total_layers:
+                raise ValueError(f"Invalid fine_tune_at value: {fine_tune_at}. Must be between 0 and {total_layers - 1}.")
 
-            # Calculate the starting index to unfreeze
-            fine_tune_at = total_layers - num_trainable_layers
-            print(f"Fine-tuning from layer index: {fine_tune_at}")
+
+            # 🔓 Unfreeze layers from fine_tune_at onward
+            for layer in model.layers[fine_tune_at:]:
+                layer.trainable = True
+
+                # 🔥 Print which layers are now trainable
+            print(f"\n📋 Updated trainable layers after fine_tuning:")
+            for idx, layer in enumerate(model.layers):
+                print(f"Layer {idx}: {layer.name}, Trainable: {layer.trainable}")
+
+            model.summary()
 
     ######################################
 
     # Compile the model
-    adamlr = optimizers.Adam(learning_rate=0.009765, beta_1=0.9, beta_2=0.999, epsilon=1e-08, amsgrad=True)
+    adamlr = optimizers.Adam(learning_rate=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, amsgrad=True)
     model.compile(loss=weighted_loss, optimizer=adamlr)
 
     # Callbacks for training

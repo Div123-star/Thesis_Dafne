@@ -9,7 +9,6 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject, QVariant
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLineEdit, QSpinBox, QLabel
 
-
 import matplotlib.pyplot as plt
 import numpy as np
 from PyQt5.QtWidgets import QMessageBox, QFileDialog, QWidget
@@ -171,7 +170,6 @@ class ModelTrainer(QWidget, Ui_ModelTrainerUI):
             if widget:
                 widget.setEnabled(enabled)
 
-
     def on_text_changed(self):
         """Enable or disable the Fit button based on text in base_model_text."""
         if self.BaseModel_Text.text().strip():
@@ -209,8 +207,6 @@ class ModelTrainer(QWidget, Ui_ModelTrainerUI):
             self.transfer_learning_checkBox.blockSignals(True)  # Prevent recursion
             self.transfer_learning_checkBox.setChecked(not bool(state))  # Invert the state
             self.transfer_learning_checkBox.blockSignals(False)
-
-
 
     @pyqtSlot(str, str, result=object)
     def extract_parameter(self, source_code, parameter_name):
@@ -365,11 +361,10 @@ class ModelTrainer(QWidget, Ui_ModelTrainerUI):
                 kernel_size = self.extract_parameter(source_code, 'INITIAL_KERNEL_SIZE')
                 common_resolution = self.extract_parameter(apply_source_code, 'MODEL_RESOLUTION')
                 model_size = self.extract_parameter(source_code, 'MODEL_SIZE')
-           #############
+                #############
                 # Get number of trainable layers from spin box
-                num_trainable_layers = self.num_trainable_layers_spinBox.value()
-                print(f"Number of trainable layers set to: {num_trainable_layers}")
-            ##########################
+
+
             else:
                 QMessageBox.critical(self, "Error", "Invalid base model path.")
                 return
@@ -387,7 +382,18 @@ class ModelTrainer(QWidget, Ui_ModelTrainerUI):
 
         create_model_function, apply_model_function, incremental_learn_function = get_model_functions(source)
         model = create_model_function()
+        ##################################
+        #  Dynamically adjust spinbox after knowing total_layers
+        total_layers = len(model.layers)
+        print(f"Total layers in the created model: {total_layers}")
+        self.fine_tune_at_spinBox.setMaximum(total_layers)
+        if self.transfer_learning_checkBox.isChecked():
+           fine_tune_at = self.fine_tune_at_spinBox.value()  # Updated reference
+           print(f"Fine-tune starting at layer index: {fine_tune_at} of {total_layers} total layers.")
 
+        else:
+            fine_tune_at = None
+        #########################################
         n_datasets = len(data_list)
         if n_datasets < 10:
             validation_split = 0.2
@@ -432,7 +438,8 @@ class ModelTrainer(QWidget, Ui_ModelTrainerUI):
             self.slice_select_slider.setEnabled(False)
 
         trained_model, history = train_model(model, training_generator, steps, x_val_list, y_val_list,
-                                             [self.fitting_ui_callback], base_model, num_trainable_layers)
+                                             [self.fitting_ui_callback], base_model, fine_tune_at=fine_tune_at
+                                             )
         if self.fitting_ui_callback.best_weights is not None:
             trained_model.set_weights(self.fitting_ui_callback.best_weights)
 
@@ -554,6 +561,7 @@ class ModelTrainer(QWidget, Ui_ModelTrainerUI):
                 self.fit_Button.setText('Stopping...')
         else:
             self.fit()
+
 
 def main():
     import sys

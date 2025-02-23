@@ -4,15 +4,15 @@ from dafne_dl import DynamicDLModel
 import matplotlib.pyplot as plt
 
 # load the model
-with open('/Users/dibya/MyThesisDatasets/final_model/chaos_transfer.model', 'rb') as f:
+with open('//Users/dibya/160_amos.model', 'rb') as f:
     m = DynamicDLModel.Load(f)
 
 # load the data
-with open('/Users/dibya/MyThesisDatasets/amos22/MRI_data/test_npz/amos_0578.npz', 'rb') as f:
+with open('/Users/dibya/MyThesisDatasets/CHAOS_Dataset_for_Dibya/all_patient/test_chaos/32.npz', 'rb') as f:
     d = np.load(f)
     image = d['data']
     resolution = d['resolution']
-    mask_Liver = d['mask_liver']
+    mask_Liver = d['mask_Liver']
 
 out_mask_liver = np.zeros_like(image)
 base_mask_liver = np.zeros_like(image)
