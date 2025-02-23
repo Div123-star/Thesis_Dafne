@@ -1,3 +1,4 @@
 # Project exclude paths
 /dafne-venv/.venv1/
 .DS_Store
+.venv1/
