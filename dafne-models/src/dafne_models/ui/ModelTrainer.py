@@ -95,7 +95,6 @@ class ModelTrainer(QWidget, Ui_ModelTrainerUI):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.setupUi(self)
-
         self.setWindowTitle('Dafne Model Trainer')
         self.advanced_widget.hide()
         self.fit_output_box.hide()

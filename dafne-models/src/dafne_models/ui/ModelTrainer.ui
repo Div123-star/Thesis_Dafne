@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>824</width>
-    <height>769</height>
+    <height>824</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,20 +68,6 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="QLabel" name="fine_tune_label">
-          <property name="text">
-           <string>fine_tune_at</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="fine_tune_at_spinBox">
-          <property name="maximum">
-           <number>300</number>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QLabel" name="label_6">
           <property name="text">
            <string>Base model:</string>
@@ -111,6 +97,20 @@
           </property>
           <property name="default">
            <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="fine_tune_label">
+          <property name="text">
+           <string>fine_tune_at</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="fine_tune_at_spinBox">
+          <property name="maximum">
+           <number>300</number>
           </property>
          </widget>
         </item>
@@ -378,5 +378,3 @@
  <resources/>
  <connections/>
 </ui>
-
-
