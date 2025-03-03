@@ -351,7 +351,7 @@ def train_model(model, training_generator, steps, x_val_list, y_val_list, custom
     ######################################
 
     # Compile the model
-    adamlr = optimizers.Adam(learning_rate=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, amsgrad=True)
+    adamlr = optimizers.Adam(learning_rate=0.009, beta_1=0.9, beta_2=0.999, epsilon=1e-08, amsgrad=True)
     model.compile(loss=weighted_loss, optimizer=adamlr)
 
     # Callbacks for training
